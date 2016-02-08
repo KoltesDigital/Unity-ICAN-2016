@@ -1,6 +1,6 @@
 # Dice simulator
 
-This example throws dices and displays the results;
+This example throws dices and displays the results.
 
 ## Take away
 
