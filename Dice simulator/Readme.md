@@ -2,6 +2,8 @@
 
 This example throws dices and displays the results.
 
+Press any key to throw the dices.
+
 ## Take away
 
 1. [For loops](https://msdn.microsoft.com/en-us/library/ch45axte.aspx)
