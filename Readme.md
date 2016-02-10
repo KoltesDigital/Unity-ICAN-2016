@@ -10,3 +10,8 @@ Agenda:
 2. Use of [Random.value](http://docs.unity3d.com/ScriptReference/Random-value.html)
 3. Color generation using [HSL / HSV color spaces](https://en.wikipedia.org/wiki/HSL_and_HSV)
 4. Random card generator based on a deck of cards
+
+## Extra
+
+1. Computer hardware
+2. Processor instructions fall into: _Arithmetics_, _Comparisons_, and _Jumps_
