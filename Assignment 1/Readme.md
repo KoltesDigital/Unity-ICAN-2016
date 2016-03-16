@@ -16,6 +16,12 @@ Prototype goals:
 10. Signs appear on the black part of the road texture, randomly on the left or on the right.
 11. Road, trees, and signs move toward the player under the player's control (e.g. by pressing a key), in order to simulate the car driving.
 
+Notes on assets:
+
+* The road maps the whole texture horizontally, but (exactly) 25% of it vertically. Thus you can offset it to simulate the car driving.
+* A script is already provided. Its purpose is to snap the objects to the road, provided an angle in radians.
+* The road cylinder is cut to spare resources. Its revolution angle is about 120 degrees. There's a precise constant in the provided script to describe the angle to the road edge (half of the revolution angle, thus about 60 degrees).
+
 Credits:
 
 [Road sign pictures](https://www.gov.uk/guidance/the-highway-code/traffic-signs)
