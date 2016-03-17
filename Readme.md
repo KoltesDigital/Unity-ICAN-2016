@@ -2,9 +2,12 @@
 
 > Course material
 
-## Randomness
+## Computer hardware
 
-Agenda:
+1. Computer hardware
+2. Processor instructions fall into: _Arithmetics_, _Comparisons_, and _Jumps_, that's all
+
+## Randomness
 
 1. Theory: Difference between 1D12 and 2D6, [Probability density function](https://en.wikipedia.org/wiki/Probability_density_function)
 2. Use of [Random.value](http://docs.unity3d.com/ScriptReference/Random-value.html)
@@ -12,14 +15,28 @@ Agenda:
 4. Random card generator based on a deck of cards
 5. Random room generator
 
+## Git
+
+1. Commit, history
+2. Branching, feature branchs
+3. Merge, rebase
+4. Collaboration, GitHub
+
+Interfaces:
+
+* [git](https://git-scm.com/)
+* [SourceTree](https://www.sourcetreeapp.com/)
+* [GitHub Desktop](https://desktop.github.com/)
+
 ## Physics
 
-Agenda:
-
 1. Smooth movements
+2. Physics simulation
 
-## Extra
+## Rendering
 
-1. Computer hardware
-2. Processor instructions fall into: _Arithmetics_, _Comparisons_, and _Jumps_
-3. [git](https://git-scm.com/)
+1. Shaders
+
+## Evaluation
+
+Assignment 1: Randomness, smooth movements
