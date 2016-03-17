@@ -1,8 +1,8 @@
 # Assignment 1: driving game prototype
 
-Deadline:
+Deadline: (-1 per day beyond it)
 * **Wednesday, March 23**, 11:59 PM CET for **2GD1**.
-* **Sunday, March 27**, 11:59 PM** CET for **2GD2**.
+* **Sunday, March 27**, 11:59 PM CET for **2GD2**.
 
 Prototype goals:
 
@@ -17,6 +17,13 @@ Prototype goals:
 9. Signs are randomly chosen, but diversified: the same sign should not appear twice in a row.
 10. Signs appear on the black part of the road texture, randomly on the left or on the right.
 11. Road, trees, and signs move toward the player under the player's control (e.g. by pressing a key), in order to simulate the car driving.
+12. 
+
+Hints:
+
+* You may do these tasks in any order. Prioritize the tasks!
+* From a code point of view, there is no dependency between these tasks. If you are stuck in a task, you can still continue without this feature.
+* You'll also be evaluated on the code quality: readability, class responsabilities, etc.
 
 Notes on assets:
 
