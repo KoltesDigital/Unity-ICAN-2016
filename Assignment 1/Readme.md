@@ -1,6 +1,8 @@
 # Assignment 1: driving game prototype
 
-Deadline: **Sunday, March 20, 11:59 PM** CET for **2GD1**.
+Deadline:
+* **Wednesday, March 23**, 11:59 PM CET for **2GD1**.
+* **Sunday, March 27**, 11:59 PM** CET for **2GD2**.
 
 Prototype goals:
 
