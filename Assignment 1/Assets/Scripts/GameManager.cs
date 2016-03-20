@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(RoadManager))]
 public class GameManager : MonoBehaviour
 {
-    public Material roadMaterial;
-    Vector2 textureOffset;
+    [HideInInspector]
+    public RoadManager roadManager;
 
     // already generate trees at startup
     // the same algorithm is used, but instead of adding
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public float minTreeRadius = 5.0f;
     public float maxTreeRadius = 10.0f;
     float nextTreeRadius;
+    public float treeMarginToRoad = 5.0f;
 
     public GameObject signPrefab;
     public List<Texture> signTextures = new List<Texture>();
@@ -30,10 +32,10 @@ public class GameManager : MonoBehaviour
 
     List<RoadFollower> roadFollowers = new List<RoadFollower>();
     public Transform roadFollowersParent;
-
+    
     void Awake()
     {
-        textureOffset = roadMaterial.mainTextureOffset;
+        roadManager = GetComponent<RoadManager>();
     }
 
     void Start()
@@ -53,8 +55,7 @@ public class GameManager : MonoBehaviour
 	public void Advance(float da)
     {
         // offsets texture
-        textureOffset.y = Mathf.Repeat(textureOffset.y + Constants.CylinderAngleOffsetToTextureOffset(da), 1.0f);
-        roadMaterial.mainTextureOffset = textureOffset;
+        roadManager.Advance(da);
 
         // add trees and sign
         FillWithTrees();
@@ -132,9 +133,9 @@ public class GameManager : MonoBehaviour
 
     void FillWithTrees(float cylinderAngle = Constants.EdgeAngle)
     {
-        List<float> borders = GetRoadBorders(roadMaterial, cylinderAngle);
-        FillSectionWithTrees(cylinderAngle, -Constants.XMax, borders[0]);
-        FillSectionWithTrees(cylinderAngle, borders[1], Constants.XMax);
+        List<float> borders = roadManager.GetBorders(cylinderAngle);
+        FillSectionWithTrees(cylinderAngle, -Constants.XMax, borders[0] - treeMarginToRoad);
+        FillSectionWithTrees(cylinderAngle, borders[1] + treeMarginToRoad, Constants.XMax);
     }
     
     void GenerateNextTreeRadius()
@@ -146,7 +147,7 @@ public class GameManager : MonoBehaviour
     {
         if (nextSignAngle < cylinderAngle)
         {
-            List<float> borders = GetRoadBorders(roadMaterial, nextSignAngle);
+            List<float> borders = roadManager.GetBorders(nextSignAngle);
             float x = borders[Random.Range(0, borders.Count)];
 
             GameObject sign = Instantiate<GameObject>(signPrefab);
@@ -169,51 +170,5 @@ public class GameManager : MonoBehaviour
 
             nextSignAngle += Random.Range(minSignInterval, maxSignInterval);
         }
-
-    }
-
-    // return a list of positions along X axis in range (-XMax, XMax)
-    static List<float> GetRoadBorders(Material roadMaterial, float cylinderAngle)
-    {
-        List<float> borders = new List<float>();
-
-        int clusterPoints = 0;
-        int clusterXSum = 0;
-
-        int y = Constants.GetRoadTextureY(roadMaterial, cylinderAngle);
-        Texture2D roadTexture = roadMaterial.mainTexture as Texture2D;
-        for (int x = 0; x < roadTexture.width; ++x)
-        {
-            Color color = roadTexture.GetPixel(x, y);
-
-            if (color.maxColorComponent < Constants.BlackThreshold)
-            {
-                // build clusters of black pixels
-                ++clusterPoints;
-                clusterXSum += x;
-            }
-            else if (clusterPoints > 0)
-            {
-                // cluster is over
-                float center = (float)clusterXSum / clusterPoints;
-                borders.Add((center * 2.0f / roadTexture.width - 1.0f) * Constants.XMax);
-                clusterXSum = 0;
-                clusterPoints = 0;
-            }
-        }
-
-        // if we're still in a cluster
-        if (clusterPoints > 0)
-        {
-            float center = (float)clusterXSum / clusterPoints;
-            borders.Add((center * 2.0f / roadTexture.width - 1.0f) * Constants.XMax);
-        }
-
-        if (borders.Count != 2)
-        {
-            Debug.LogWarning("There are not exactly 2 borders");
-        }
-
-        return borders;
     }
 }

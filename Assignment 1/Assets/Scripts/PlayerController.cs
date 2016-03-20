@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(RoadFollower))]
 public class PlayerController : MonoBehaviour {
     public GameManager gameManager;
+    RoadManager roadManager;
 
     public float cylinderAngle = -0.6f;
     public float maxTurnAngle = 0.5f;
@@ -13,7 +14,17 @@ public class PlayerController : MonoBehaviour {
     public float damping = 1.0f;
     float speed = 0.0f;
 
+    public float margin = 5.0f;
+
     RoadFollower roadFollower;
+    
+    void ResetToRoadCenter()
+    {
+        List<float> borders = roadManager.GetBorders(cylinderAngle);
+        roadFollower.SetX((borders[0] + borders[1]) * 0.5f);
+        roadFollower.SetRotationAngle(0.0f);
+        speed = 0.0f;
+    }
 
     void Awake()
     {
@@ -22,19 +33,35 @@ public class PlayerController : MonoBehaviour {
     
     void Start ()
     {
+        roadManager = gameManager.roadManager;
+        
         roadFollower.SetCylinderAngle(cylinderAngle);
+        ResetToRoadCenter();
     }
 	
 	void Update ()
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        // movement
+        float horizontal = Mathf.Clamp(Input.GetAxis("Horizontal"), -speed, speed);
         roadFollower.SetRotationAngle(horizontal * maxTurnAngle);
         roadFollower.AdvanceX(horizontal * strafeRatio);
 
+        // speed integration
         float vertical = Input.GetAxis("Vertical");
         float acceleration = vertical * accelerationRatio;
         speed += acceleration * Time.deltaTime;
         speed *= 1.0f / (1.0f + damping * Time.deltaTime);
+
+        // checking for off road
+        float x = roadFollower.GetX();
+        List<float> borders = roadManager.GetBorders(cylinderAngle);
+        if (x - margin < borders[0] || borders[1] < x + margin)
+        {
+            ResetToRoadCenter();
+        }
+
+        // this is the cylinder angle the car travels during this frame
+        // in reality, the car doesn't move, all other objects move backwards
         float da = speed * Time.deltaTime;
         gameManager.Advance(da);
     }
