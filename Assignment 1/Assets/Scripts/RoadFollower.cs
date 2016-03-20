@@ -49,6 +49,11 @@ public class RoadFollower : MonoBehaviour
         transform.localPosition = position;
     }
 
+    public float GetCylinderAngle()
+    {
+        return cylinderAngle;
+    }
+
     public void SetCylinderAngle(float angle)
     {
         cylinderAngle = angle;
@@ -57,7 +62,7 @@ public class RoadFollower : MonoBehaviour
 
     public void AdvanceCylinderAngle(float da)
     {
-        cylinderAngle += da;
+        cylinderAngle -= da;
         UpdateYZPosition();
     }
 

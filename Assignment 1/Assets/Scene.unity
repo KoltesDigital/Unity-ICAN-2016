@@ -113,6 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadMaterial: {fileID: 2100000, guid: cac0ccb617319a6468f7980f15e3a3c8, type: 2}
+  StartTreeFillingSteps: 100
+  treePrefab: {fileID: 143826, guid: f699ce17528f099429587130d46e51de, type: 2}
+  roadFollowersParent: {fileID: 433144989}
 --- !u!4 &280917653
 Transform:
   m_ObjectHideFlags: 0
@@ -186,6 +189,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &433144988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 433144989}
+  m_Layer: 0
+  m_Name: RoadFollowers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &433144989
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 433144988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1001 &678920968
 Prefab:
   m_ObjectHideFlags: 0
@@ -392,3 +422,4 @@ MonoBehaviour:
   maxTurnAngle: 0.5
   strafeRatio: 1
   accelerationRatio: 1
+  damping: 1
