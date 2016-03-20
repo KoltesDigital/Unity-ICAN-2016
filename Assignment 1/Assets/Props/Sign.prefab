@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 459728}
   - 114: {fileID: 11491852}
+  - 114: {fileID: 11420182}
   m_Layer: 0
   m_Name: Sign
   m_TagString: Untagged
@@ -154,6 +155,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162750}
   m_Mesh: {fileID: 4300000, guid: e64c781638fa75849a94a41a4bf2ce23, type: 3}
+--- !u!114 &11420182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61acde300eef8244981e4b70a1ef92c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signMeshRenderer: {fileID: 2340052}
 --- !u!114 &11491852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,14 +178,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f755d1571ac7edd4d898fc7232ca01ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
+  rotationLerpRatio: 1
+  radius: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: signMeshRenderer
+      value: 
+      objectReference: {fileID: 2340052}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112054}

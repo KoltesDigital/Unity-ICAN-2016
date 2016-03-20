@@ -21,6 +21,13 @@ public class GameManager : MonoBehaviour
     public float maxTreeRadius = 10.0f;
     float nextTreeRadius;
 
+    public GameObject signPrefab;
+    public List<Texture> signTextures = new List<Texture>();
+    DeckGenerator<Texture> signTextureGenerator = new DeckGenerator<Texture>();
+    public float minSignInterval = 1.0f;
+    public float maxSignInterval = 2.0f;
+    float nextSignAngle = -Constants.EdgeAngle;
+
     List<RoadFollower> roadFollowers = new List<RoadFollower>();
     public Transform roadFollowersParent;
 
@@ -31,12 +38,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        signTextureGenerator.Add(signTextures);
+
         GenerateNextTreeRadius();
 
         for (int i = 0; i < TreeFillingStartSteps; ++i)
         {
             float angle = (i * 2.0f / TreeFillingStartSteps - 1.0f) * Constants.EdgeAngle;
             FillWithTrees(angle);
+            FillWithSign(angle);
         }
     }
 
@@ -46,7 +56,11 @@ public class GameManager : MonoBehaviour
         textureOffset.y = Mathf.Repeat(textureOffset.y + Constants.CylinderAngleOffsetToTextureOffset(da), 1.0f);
         roadMaterial.mainTextureOffset = textureOffset;
 
+        // add trees and sign
         FillWithTrees();
+
+        nextSignAngle -= da;
+        FillWithSign();
 
         // advances road followers, and remove them
         // when they are too far behind the car
@@ -122,10 +136,40 @@ public class GameManager : MonoBehaviour
         FillSectionWithTrees(cylinderAngle, -Constants.XMax, borders[0]);
         FillSectionWithTrees(cylinderAngle, borders[1], Constants.XMax);
     }
-
+    
     void GenerateNextTreeRadius()
     {
         nextTreeRadius = Random.Range(minTreeRadius, maxTreeRadius);
+    }
+
+    void FillWithSign(float cylinderAngle = Constants.EdgeAngle)
+    {
+        if (nextSignAngle < cylinderAngle)
+        {
+            List<float> borders = GetRoadBorders(roadMaterial, nextSignAngle);
+            float x = borders[Random.Range(0, borders.Count)];
+
+            GameObject sign = Instantiate<GameObject>(signPrefab);
+            RoadFollower roadFollower = sign.GetComponent<RoadFollower>();
+            SignHolder signHolder = sign.GetComponent<SignHolder>();
+            if (roadFollower && signHolder)
+            {
+                roadFollower.transform.SetParent(roadFollowersParent, false);
+
+                roadFollower.SetCylinderAngle(nextSignAngle);
+                roadFollower.SetX(x);
+                roadFollowers.Add(roadFollower);
+
+                signHolder.SetSign(signTextureGenerator.Draw());
+            }
+            else
+            {
+                Debug.LogError("Sign prefab has no RoadFollower or SignHolder component");
+            }
+
+            nextSignAngle += Random.Range(minSignInterval, maxSignInterval);
+        }
+
     }
 
     // return a list of positions along X axis in range (-XMax, XMax)

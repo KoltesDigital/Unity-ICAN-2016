@@ -118,6 +118,19 @@ MonoBehaviour:
   treePrefab: {fileID: 143826, guid: f699ce17528f099429587130d46e51de, type: 2}
   minTreeRadius: 4
   maxTreeRadius: 8
+  signPrefab: {fileID: 112054, guid: 67d97d23ab347e84bb9a17b267e670f8, type: 2}
+  signTextures:
+  - {fileID: 2800000, guid: 7cb67e6c023443b4c85567fc7ba1b7bb, type: 3}
+  - {fileID: 2800000, guid: e76bd54d3534b144188cf62f7f0bc7e6, type: 3}
+  - {fileID: 2800000, guid: c6cad9d8fa5d0b3409cd7f579ddb2b0f, type: 3}
+  - {fileID: 2800000, guid: c0dba4cb9eaf2524c888f00f2fb28d50, type: 3}
+  - {fileID: 2800000, guid: 6a23ba575883cf142bdd81a72a51c395, type: 3}
+  - {fileID: 2800000, guid: cf14ec89676af554c823af5dbf3757a7, type: 3}
+  - {fileID: 2800000, guid: 664223f7e7c47394a92818a5ef946330, type: 3}
+  - {fileID: 2800000, guid: 21e518c3d2c132c4baaac371561f5a77, type: 3}
+  - {fileID: 2800000, guid: 4a541a526a6c40e46b3d07a4bbcdc60d, type: 3}
+  minSignInterval: 1
+  maxSignInterval: 2
   roadFollowersParent: {fileID: 433144989}
 --- !u!4 &280917653
 Transform:
