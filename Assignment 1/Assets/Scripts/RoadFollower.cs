@@ -5,10 +5,10 @@ public class RoadFollower : MonoBehaviour
 {
     // angle around the cylinder
     // this drives the object's YZ coordinates
-    float cylinderAngle = 0.0f;
+    float _cylinderAngle = 0.0f;
 
     // object rotation around its Z axis to simulate the car turning
-    float rotationTargetAngle = 0.0f;
+    public float rotationTargetAngle = 0.0f;
     float rotationCurrentAngle = 0.0f;
     public float rotationLerpRatio = 1.0f;
 
@@ -17,6 +17,32 @@ public class RoadFollower : MonoBehaviour
 
     [HideInInspector]
     public float radius = 0.0f;
+
+    public float cylinderAngle
+    {
+        get
+        {
+            return _cylinderAngle;
+        }
+        set
+        {
+            _cylinderAngle = value;
+            UpdateYZPosition();
+        }
+    }
+
+    public float x
+    {
+        get
+        {
+            return position.x;
+        }
+        set
+        {
+            position.x = value;
+            transform.localPosition = position;
+        }
+    }
 
     void Start()
     {
@@ -28,7 +54,9 @@ public class RoadFollower : MonoBehaviour
         rotationCurrentAngle = Mathf.Lerp(rotationCurrentAngle, rotationTargetAngle, rotationLerpRatio * Time.deltaTime);
 
         // orient object to the normal
-        Quaternion rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * cylinderAngle, Vector3.right) * Quaternion.AngleAxis(Mathf.Rad2Deg * rotationCurrentAngle, Vector3.up);
+        Quaternion rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * cylinderAngle, Vector3.right);
+        // rotate object around its Z axis
+        rotation *= Quaternion.AngleAxis(Mathf.Rad2Deg * rotationCurrentAngle, Vector3.up);
         transform.localRotation = rotation;
     }
 
@@ -38,44 +66,5 @@ public class RoadFollower : MonoBehaviour
         position.y = (Mathf.Cos(cylinderAngle) - 1.0f) * Constants.RoadRadius;
         position.z = Mathf.Sin(cylinderAngle) * Constants.RoadRadius;
         transform.localPosition = position;
-    }
-
-    public float GetX()
-    {
-        return position.x;
-    }
-
-    public void SetX(float x)
-    {
-        position.x = x;
-        transform.localPosition = position;
-    }
-
-    public void AdvanceX(float dx)
-    {
-        position.x += dx;
-        transform.localPosition = position;
-    }
-
-    public float GetCylinderAngle()
-    {
-        return cylinderAngle;
-    }
-
-    public void SetCylinderAngle(float angle)
-    {
-        cylinderAngle = angle;
-        UpdateYZPosition();
-    }
-
-    public void AdvanceCylinderAngle(float da)
-    {
-        cylinderAngle -= da;
-        UpdateYZPosition();
-    }
-
-    public void SetRotationAngle(float angle)
-    {
-        rotationTargetAngle = angle;
     }
 }

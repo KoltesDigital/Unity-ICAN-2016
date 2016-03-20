@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 
 [RequireComponent(typeof(RoadFollower))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     public GameManager gameManager;
     RoadManager roadManager;
 
@@ -21,8 +22,8 @@ public class PlayerController : MonoBehaviour {
     void ResetToRoadCenter()
     {
         List<float> borders = roadManager.GetBorders(cylinderAngle);
-        roadFollower.SetX((borders[0] + borders[1]) * 0.5f);
-        roadFollower.SetRotationAngle(0.0f);
+        roadFollower.x = (borders[0] + borders[1]) * 0.5f;
+        roadFollower.rotationTargetAngle = 0.0f;
         speed = 0.0f;
     }
 
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour {
     {
         roadManager = gameManager.roadManager;
         
-        roadFollower.SetCylinderAngle(cylinderAngle);
+        roadFollower.cylinderAngle = cylinderAngle;
         ResetToRoadCenter();
     }
 	
@@ -43,8 +44,8 @@ public class PlayerController : MonoBehaviour {
     {
         // movement
         float horizontal = Mathf.Clamp(Input.GetAxis("Horizontal"), -speed, speed);
-        roadFollower.SetRotationAngle(horizontal * maxTurnAngle);
-        roadFollower.AdvanceX(horizontal * strafeRatio);
+        roadFollower.rotationTargetAngle = horizontal * maxTurnAngle;
+        roadFollower.x += horizontal * strafeRatio;
 
         // speed integration
         float vertical = Input.GetAxis("Vertical");
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour {
         speed *= 1.0f / (1.0f + damping * Time.deltaTime);
 
         // checking for off road
-        float x = roadFollower.GetX();
+        float x = roadFollower.x;
         List<float> borders = roadManager.GetBorders(cylinderAngle);
         if (x - margin < borders[0] || borders[1] < x + margin)
         {

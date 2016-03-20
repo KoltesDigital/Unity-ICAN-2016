@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
         for (int i = roadFollowers.Count - 1; i >= 0; --i)
         {
             RoadFollower roadFollower = roadFollowers[i];
-            roadFollower.AdvanceCylinderAngle(da);
-            if (roadFollower.GetCylinderAngle() < -Constants.EdgeAngle)
+            roadFollower.cylinderAngle -= da;
+            if (roadFollower.cylinderAngle < -Constants.EdgeAngle)
             {
                 Destroy(roadFollower.gameObject);
                 roadFollowers.RemoveAt(i);
@@ -93,8 +93,8 @@ public class GameManager : MonoBehaviour
                     RoadFollower roadFollower = roadFollowers[i];
 
                     Vector2 offset;
-                    offset.x = roadFollower.GetX() - x;
-                    offset.y = (roadFollower.GetCylinderAngle() - cylinderAngle) * Constants.RoadRadius;
+                    offset.x = roadFollower.x - x;
+                    offset.y = (roadFollower.cylinderAngle - cylinderAngle) * Constants.RoadRadius;
                     
                     if (offset.magnitude < roadFollower.radius + nextTreeRadius)
                     {
@@ -111,8 +111,8 @@ public class GameManager : MonoBehaviour
                     {
                         roadFollower.transform.SetParent(roadFollowersParent, false);
 
-                        roadFollower.SetCylinderAngle(cylinderAngle);
-                        roadFollower.SetX(x);
+                        roadFollower.cylinderAngle = cylinderAngle;
+                        roadFollower.x = x;
                         roadFollower.radius = nextTreeRadius;
                         roadFollowers.Add(roadFollower);
 
@@ -157,8 +157,8 @@ public class GameManager : MonoBehaviour
             {
                 roadFollower.transform.SetParent(roadFollowersParent, false);
 
-                roadFollower.SetCylinderAngle(nextSignAngle);
-                roadFollower.SetX(x);
+                roadFollower.cylinderAngle = nextSignAngle;
+                roadFollower.x = x;
                 roadFollowers.Add(roadFollower);
 
                 signHolder.SetSign(signTextureGenerator.Draw());
