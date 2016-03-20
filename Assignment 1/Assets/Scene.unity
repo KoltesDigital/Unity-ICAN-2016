@@ -85,6 +85,46 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &280917651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 280917653}
+  - 114: {fileID: 280917652}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &280917652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 280917651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d0148a465f28e4eb669f6db604aa17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roadMaterial: {fileID: 2100000, guid: cac0ccb617319a6468f7980f15e3a3c8, type: 2}
+--- !u!4 &280917653
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 280917651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &301896312
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f755d1571ac7edd4d898fc7232ca01ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LerpRatio: 10
+  rotationLerpRatio: 10
 --- !u!114 &1975234572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce76961b462b3745bbea59a57b20f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 280917652}
   cylinderAngle: -0.6
   maxTurnAngle: 0.5
   strafeRatio: 1
+  accelerationRatio: 1

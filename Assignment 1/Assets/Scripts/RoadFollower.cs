@@ -10,13 +10,10 @@ public class RoadFollower : MonoBehaviour
     // object rotation around its Z axis to simulate the car turning
     float rotationTargetAngle = 0.0f;
     float rotationCurrentAngle = 0.0f;
+    public float rotationLerpRatio = 1.0f;
 
     // cache variable to assign to transform.localPosition
     Vector3 position;
-
-    const float RoadRadius = 50.0f;
-    const float EdgeAngle = 1.08f;
-    public float LerpRatio = 1.0f;
 
     void Start()
     {
@@ -25,7 +22,7 @@ public class RoadFollower : MonoBehaviour
 
     void Update()
     {
-        rotationCurrentAngle = Mathf.Lerp(rotationCurrentAngle, rotationTargetAngle, LerpRatio * Time.deltaTime);
+        rotationCurrentAngle = Mathf.Lerp(rotationCurrentAngle, rotationTargetAngle, rotationLerpRatio * Time.deltaTime);
 
         // orient object to the normal
         Quaternion rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * cylinderAngle, Vector3.right) * Quaternion.AngleAxis(Mathf.Rad2Deg * rotationCurrentAngle, Vector3.up);
@@ -35,8 +32,8 @@ public class RoadFollower : MonoBehaviour
     void UpdateYZPosition()
     {
         // snap object to the ground
-        position.y = (Mathf.Cos(cylinderAngle) - 1.0f) * RoadRadius;
-        position.z = Mathf.Sin(cylinderAngle) * RoadRadius;
+        position.y = (Mathf.Cos(cylinderAngle) - 1.0f) * Constants.RoadRadius;
+        position.z = Mathf.Sin(cylinderAngle) * Constants.RoadRadius;
         transform.localPosition = position;
     }
 
