@@ -66,4 +66,10 @@ public class RoadFollower : MonoBehaviour
         position.z = Mathf.Sin(cylinderAngle) * Constants.RoadRadius;
         transform.localPosition = position;
     }
+
+    public void ResetRotation()
+    {
+        rotationCurrentAngle = 0.0f;
+        rotationTargetAngle = 0.0f;
+    }
 }

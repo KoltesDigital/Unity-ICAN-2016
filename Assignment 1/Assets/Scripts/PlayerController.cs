@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         List<float> borders = roadManager.GetBorders(cylinderAngle);
         roadFollower.x = (borders[0] + borders[1]) * 0.5f;
-        roadFollower.rotationTargetAngle = 0.0f;
+        roadFollower.ResetRotation();
         speed = 0.0f;
     }
 
