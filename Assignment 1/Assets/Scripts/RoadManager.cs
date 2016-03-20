@@ -13,7 +13,7 @@ public class RoadManager : MonoBehaviour
 
     public void Advance(float da)
     {
-        textureOffset.y = Mathf.Repeat(textureOffset.y + Constants.CylinderAngleOffsetToTextureOffset(da), 1.0f);
+        textureOffset.y = Mathf.Repeat(textureOffset.y + CylinderAngleOffsetToTextureOffset(da), 1.0f);
         roadMaterial.mainTextureOffset = textureOffset;
     }
 
@@ -25,7 +25,7 @@ public class RoadManager : MonoBehaviour
         int clusterPoints = 0;
         int clusterXSum = 0;
 
-        int y = Constants.GetRoadTextureY(roadMaterial, cylinderAngle);
+        int y = GetRoadTextureY(cylinderAngle);
         Texture2D roadTexture = roadMaterial.mainTexture as Texture2D;
         for (int x = 0; x < roadTexture.width; ++x)
         {
@@ -60,5 +60,28 @@ public class RoadManager : MonoBehaviour
         }
 
         return borders;
+    }
+
+
+    // return the texture's Y coordinate with corresponds to the cylinder angle
+    int GetRoadTextureY(float cylinderAngle)
+    {
+        // cylinderAngle in range (-EdgeAngle, EdgeAngle)
+        // -> v in range (0, VMax)
+        float v = ((cylinderAngle / Constants.EdgeAngle) + 1.0f) * 0.5f * Constants.VMax;
+
+        // texture offset
+        v += roadMaterial.mainTextureOffset.y;
+
+        // texture wraps
+        v = Mathf.Repeat(v, 1.0f);
+
+        return Mathf.FloorToInt(v * roadMaterial.mainTexture.height);
+    }
+
+    static float CylinderAngleOffsetToTextureOffset(float da)
+    {
+        // angle offset of 2*EdgeAngle -> texture offset of VMax
+        return da / (2.0f * Constants.EdgeAngle) * Constants.VMax;
     }
 }
