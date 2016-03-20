@@ -113,8 +113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadMaterial: {fileID: 2100000, guid: cac0ccb617319a6468f7980f15e3a3c8, type: 2}
-  StartTreeFillingSteps: 100
+  TreeFillingStartSteps: 100
+  TreeFillingAttempts: 10
   treePrefab: {fileID: 143826, guid: f699ce17528f099429587130d46e51de, type: 2}
+  minTreeRadius: 4
+  maxTreeRadius: 8
   roadFollowersParent: {fileID: 433144989}
 --- !u!4 &280917653
 Transform:
@@ -406,6 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationLerpRatio: 10
+  radius: 0
 --- !u!114 &1975234572
 MonoBehaviour:
   m_ObjectHideFlags: 0

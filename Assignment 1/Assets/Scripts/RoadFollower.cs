@@ -15,6 +15,9 @@ public class RoadFollower : MonoBehaviour
     // cache variable to assign to transform.localPosition
     Vector3 position;
 
+    [HideInInspector]
+    public float radius = 0.0f;
+
     void Start()
     {
         position = transform.localPosition;
@@ -35,6 +38,11 @@ public class RoadFollower : MonoBehaviour
         position.y = (Mathf.Cos(cylinderAngle) - 1.0f) * Constants.RoadRadius;
         position.z = Mathf.Sin(cylinderAngle) * Constants.RoadRadius;
         transform.localPosition = position;
+    }
+
+    public float GetX()
+    {
+        return position.x;
     }
 
     public void SetX(float x)
