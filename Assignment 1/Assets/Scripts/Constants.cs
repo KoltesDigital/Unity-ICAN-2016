@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public static class Constants
+﻿public static class Constants
 {
     public const float RoadRadius = 50.0f; // Cylinder radius
     public const float EdgeAngle = 1.08f; // Angle at cylinder edges
