@@ -26,6 +26,6 @@ public class AlphaChanger : MonoBehaviour
             material.mainTexture = textures[textureIndex];
         }
 
-        material.SetFloat("_AlphaOffset", -Mathf.Cos(2.0f * Mathf.PI * frequency * Time.time));
+        material.SetFloat("_AlphaOffset", -Mathf.Cos(2.0f * Mathf.PI * frequency * time));
 	}
 }
