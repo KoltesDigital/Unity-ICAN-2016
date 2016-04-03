@@ -36,7 +36,14 @@ Interfaces:
 ## Rendering
 
 1. Shaders
+2. UI
+
+## Core
+
+1. Serialization
 
 ## Evaluation
 
 Assignment 1: Randomness, smooth movements
+
+Assignment 2: Any project with shaders, UI, persistance, versioned (with git or another) + oral defense
