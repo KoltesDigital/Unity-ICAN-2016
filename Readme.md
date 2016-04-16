@@ -40,10 +40,10 @@ Interfaces:
 
 ## Core
 
-1. Serialization
+1. Serialization & persistence
 
 ## Evaluation
 
 Assignment 1: Randomness, smooth movements
 
-Assignment 2: Any project with shaders, UI, persistance, versioned (with git or another) + oral defense
+Assignment 2: Any project with shaders, UI, persistence, versioned (with git or another) + oral defense

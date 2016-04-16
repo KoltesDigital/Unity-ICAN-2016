@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
 
     public bool autoSave = true;
 
-    PersistantData persistantData = new PersistantData();
+    PersistentData persistentData = new PersistentData();
     VolatileData volatileData = new VolatileData();
 
     BinaryFormatter formatter = new BinaryFormatter();
@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     void UpdateTexts()
     {
         scoreText.text = volatileData.score.ToString();
-        globalHighscoreText.text = persistantData.globalHighscore.ToString();
+        globalHighscoreText.text = persistentData.globalHighscore.ToString();
         sessionHighscoreText.text = volatileData.sessionHighscore.ToString();
     }
 
@@ -44,9 +44,9 @@ public class ScoreManager : MonoBehaviour
             volatileData.sessionHighscore = volatileData.score;
         }
 
-        if (volatileData.score > persistantData.globalHighscore)
+        if (volatileData.score > persistentData.globalHighscore)
         {
-            persistantData.globalHighscore = volatileData.score;
+            persistentData.globalHighscore = volatileData.score;
             if (autoSave)
             {
                 SaveHighscore();
@@ -66,7 +66,7 @@ public class ScoreManager : MonoBehaviour
     {
         using (FileStream stream = File.OpenWrite(filePath))
         {
-            formatter.Serialize(stream, persistantData);
+            formatter.Serialize(stream, persistentData);
         }
     }
 
@@ -76,16 +76,16 @@ public class ScoreManager : MonoBehaviour
         {
             using (FileStream stream = File.OpenRead(filePath))
             {
-                persistantData = formatter.Deserialize(stream) as PersistantData;
+                persistentData = formatter.Deserialize(stream) as PersistentData;
             }
         }
         catch (FileNotFoundException)
         {
-            Debug.Log("No persistant data to load");
+            Debug.Log("No persistent data to load");
         }
         catch (InvalidCastException)
         {
-            Debug.LogWarning("Persistant data class has changed");
+            Debug.LogWarning("Persistent data class has changed");
         }
     }
 }

@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AutoSave.cs" />
-    <Compile Include="Assets\PersistantData.cs" />
+    <Compile Include="Assets\PersistentData.cs" />
     <Compile Include="Assets\ScoreManager.cs" />
     <Compile Include="Assets\VolatileData.cs" />
   </ItemGroup>

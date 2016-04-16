@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public class PersistantData
+public class PersistentData
 {
     public int globalHighscore;
 }
