@@ -46,9 +46,10 @@ Interfaces:
 1. Serialization & persistence
 2. Tools in the editor
 
-### AI
+### Extra
 
 1. A*
+2. Networking
 
 ## Evaluation
 
