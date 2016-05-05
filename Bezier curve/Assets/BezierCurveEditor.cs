@@ -7,16 +7,9 @@ public class BezierCurveEditor : Editor
     SerializedProperty endPoints;
     SerializedProperty controlPoints;
 
-    GUIStyle headerStyle;
     Color color = Color.red;
     float size = 5.0f;
-
-    BezierCurveEditor()
-    {
-        headerStyle = new GUIStyle();
-        headerStyle.fontStyle = FontStyle.Bold;
-    }
-
+    
     void OnEnable()
     {
         endPoints = serializedObject.FindProperty("endPoints");
@@ -40,7 +33,7 @@ public class BezierCurveEditor : Editor
         serializedObject.ApplyModifiedProperties();
 
         EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Inspector Only", headerStyle);
+        EditorGUILayout.LabelField("Inspector Only", EditorStyles.boldLabel);
         color = EditorGUILayout.ColorField("Color", color);
         size = EditorGUILayout.FloatField("Size", size);
     }
