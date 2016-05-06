@@ -7,8 +7,8 @@ public class BezierCurveEditor : Editor
     SerializedProperty endPoints;
     SerializedProperty controlPoints;
 
-    Color color = Color.red;
-    float size = 5.0f;
+    static Color color = Color.red;
+    static float size = 5.0f;
     
     void OnEnable()
     {
